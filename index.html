@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片字幕生成工具</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="panel">
+        <div class="panel__header">
+          <h1 class="title">图片字幕生成工具</h1>
+          <div class="subtitle">上传图片并为其添加多行字幕（实时预览）</div>
+        </div>
+
+        <section class="card">
+          <div class="card__title">1. 上传图片</div>
+          <input id="fileInput" type="file" accept="image/*" />
+          <div id="fileHint" class="hint">支持 JPG/PNG/WebP 等常见格式</div>
+        </section>
+
+        <section class="card">
+          <div class="card__title">2. 输入字幕文本（按行添加）</div>
+          <textarea
+            id="textInput"
+            rows="8"
+            placeholder="每一行会绘制到图片上\n例如：\n第一行字幕\n第二行字幕"
+          ></textarea>
+        </section>
+
+        <section class="card">
+          <div class="card__title">3. 字幕设置</div>
+
+          <div class="formRow">
+            <label for="captionHeight">字幕高度</label>
+            <div class="formRow__control">
+              <input id="captionHeight" type="range" min="0" max="50" step="1" value="18" />
+              <div class="value"><span id="captionHeightVal">18</span>%</div>
+            </div>
+          </div>
+
+          <div class="formRow">
+            <label for="fontSize">字体大小</label>
+            <div class="formRow__control">
+              <input id="fontSize" type="range" min="10" max="80" step="1" value="36" />
+              <div class="value"><span id="fontSizeVal">36</span>px</div>
+            </div>
+          </div>
+
+          <div class="formRow">
+            <label for="fontColor">字体颜色</label>
+            <div class="formRow__control">
+              <input id="fontColor" type="color" value="#ffffff" />
+              <div class="value"><span id="fontColorVal">#ffffff</span></div>
+            </div>
+          </div>
+
+          <div class="formRow">
+            <label for="bgColor">字幕背景</label>
+            <div class="formRow__control">
+              <input id="bgColor" type="color" value="#000000" />
+              <div class="value"><span id="bgColorVal">#000000</span></div>
+            </div>
+          </div>
+
+          <div class="formRow">
+            <label for="bgAlpha">背景透明度</label>
+            <div class="formRow__control">
+              <input id="bgAlpha" type="range" min="0" max="100" step="1" value="55" />
+              <div class="value"><span id="bgAlphaVal">55</span>%</div>
+            </div>
+          </div>
+
+          <div class="formRow">
+            <label for="lineGap">行间距</label>
+            <div class="formRow__control">
+              <input id="lineGap" type="range" min="0" max="40" step="1" value="8" />
+              <div class="value"><span id="lineGapVal">8</span>px</div>
+            </div>
+          </div>
+
+          <div class="btnRow">
+            <button id="downloadBtn" class="btn" disabled>下载生成图片</button>
+            <button id="resetBtn" class="btn btn--ghost">重置</button>
+          </div>
+
+          <div id="status" class="status"></div>
+        </section>
+      </aside>
+
+      <main class="preview">
+        <div class="preview__header">
+          <div class="preview__title">预览</div>
+          <div class="preview__meta" id="meta"></div>
+        </div>
+        <div class="canvasWrap">
+          <canvas id="canvas"></canvas>
+          <div id="emptyState" class="emptyState">
+            请先在左侧上传图片
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
